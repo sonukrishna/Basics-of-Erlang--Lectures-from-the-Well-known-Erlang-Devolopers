@@ -72,5 +72,50 @@ These are the main topics he covered in this lecture. And also explained the Erl
 These are the main topics he discussed here.
 
 
-                        
-                           
+## 3.Erlang master class(Kent University) -- Lnaguage processing in erlang
+###     1. Representing structured data -- Simon Thompson
+             We can represent the expressions(2 + (3 * 4)) simply as a string. But it really a bad idea, Why????....
+             When look into an expression we see a structure.ie;(2 + (3 * 4)), is a addition of 2 to the multiplication of 3                and 4. But a string is a sequence of one character to the another.
+                 So the problem is how represent the expressions in a program. We can represent it like below, as tuple.ie;
+                 (2+(3*4)) --> {add,{num,2},{mul,{num,3},{num,4}}}.
+            In general we use a type expression as below
+               -type expr() :: {'num', integer()}
+                               |{'var', atom()}
+                               |{'add', expr(), expr()}
+                               |{'mul', expr(), expr()}.
+            What it means that, writing a description ofexpression that refers to itself.ie; It gives a very clear description             of what all expression look like, what it points to etc.
+            
+            String to expr() --> parsing
+                    "(2+(3*4))" -> {add,{num,2},{mul,{num,3},{num,4}}}.
+            expr() to string --> (pretty)printing
+                    {add,{num,2},{mul,{num,3},{num,4}}}.
+                    
+###      2. Using recursion; Pretty printing - Simon Thompson
+             Starts from the pretty printing, we can convert it to string by two ways.
+                     1. Bottom Up
+                        Here first we convert the numbers to string(2 --> "2") and compine those numbers and operators to                              string("(3 * 4)"), and then at the top level we can compine to get the whole expression.
+                     2. Top down
+                        Here the idea of the recurssion is explained.We start from the top.ie; "(smthn left + smthn right)".
+                        Then we need to get the dtring from left and the string from the right.If some one gives a present 
+                        at value for the left side and the right, it will easy to write the whole expression. This is the                             simple idea of recurssion.
+                        lets start with a -spec function, it says what type we are writing. lets see
+                             -spec print(expn()) -> string.
+                              the print takes an expression and change top string. lets look at the code,
+                                  print({num, N})->
+                                       integer_to_list(N); %% convert integer to list
+                                  print({var, A}) ->
+                                       atom_to_list(A);  %% convert atoms to list
+                                  print({add, E1, E2}) ->
+                                       "(" ++ print(E1) ++ "+" ++ print(E2) ++ ")";
+                                  print ({mul, E1, E2}) ->
+                                       "(" ++ print(E1) ++ "*" ++ print(E2) ++ ")".
+                                    
+                           this code returns the expression recursively as shown below.
+                           print({add,{num,2},{mul,{num,3},{num,4}}}).
+                               -> "(" ++ print({num,2}) ++ "+" print({mul,{num,3},{num,4}}) ++ ")"
+                               -> "(" ++ "2" ++ "+" ++ "(" ++ print({num,3}) ++ "*" print({num, 4}) ++ ")" ++ ")"
+                               -> "(" ++ "2" ++ "+" ++ "(" ++ "3" ++ "*" ++ "4" ++ ")" ++ ")"
+                               -> "(2 + (3 * 4))"
+                               
+                        This is how the top down method works and the recurssion.
+                        And these are the main topics discussed here in this chapter. 
