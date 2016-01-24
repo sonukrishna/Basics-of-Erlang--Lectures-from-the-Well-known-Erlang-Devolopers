@@ -83,6 +83,7 @@ These are the main topics he discussed here.
                                |{'mul', expr(), expr()}.
             What it means that, writing a description ofexpression that refers to itself.ie; It gives a very clear description of what all expression look like, what it points to etc.
             
+            
             String to expr() --> parsing
                     "(2+(3*4))" -> {add,{num,2},{mul,{num,3},{num,4}}}.
             expr() to string --> (pretty)printing
@@ -117,3 +118,30 @@ These are the main topics he discussed here.
                                
                         This is how the top down method works and the recurssion.
                         And these are the main topics discussed here in this chapter. 
+
+###      3. Evaluating expression - Simon Thompson
+              In this section, its all about evaluating an expression. We take an expression and will  convert it to its value.
+#####       Direct evaluation of expression
+               Basic example : (2 + (3 * 4)).
+               starts with taking each expression to a number.
+                     -spec eval(expr()) -> integer()
+               So then evaluating the expression, using the basic recursion.
+                     eval({add, E1, E2}) ->
+                        eval(E1) + eval(E2).
+               And do same for the multiplication,then the result for (2 + (3 * 4)) returns as 14.
+               But what we do, when n expression like (2 + (3 * a)) cames. So we have to add an environment, which capable of compiling atoms and integers.
+                   -type env() :: [{atom(), integer()}].
+               So now, when comes a variable, we need a lookup, just like below
+                   eval(Env,{var, A}) ->
+                        lookup(Env,A).
+               The lookup()
+               --------------------
+               The lookup function, it runs through the list. When find a pair,if the first element in the pair matches with the atom we looking for, returns the second element then. We do recurssion and look for the value in the tail of the list. If the list is empty we fails.
+                  lookup(A,[{A,V}|_]) ->
+                     V;
+                  lookup(A,[_|Tail]) ->
+                     lookup(A, Tail).
+         
+               Now do exactly the same for the add and multiplication. But we need to pass Env on left and right subexpression,so that we can calculate the value of the sub expression. And compined them.
+               
+               
