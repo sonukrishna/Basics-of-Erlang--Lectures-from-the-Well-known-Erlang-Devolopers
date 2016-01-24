@@ -198,5 +198,44 @@ These are the main topics he discussed here.
                   
                   In the compiling part, compile by PUSH/FETCH to the stack,then adding compile E1 and E2 and also add the
                   operation, and then runs.
-               Next section is about parsing
+               Next section is about parsing.
                
+###     5. Parsing - Simon Thompson
+            Parsing is converting a string to an expression, we learned the basics in previous sections.
+            Basic example : ("(2+(3*4))")
+            Lets check some small examples...
+               parse("(2 + ( 3 * 4 ))") => {add,{num,2},{mul,{num,3},{num,4}}}
+               parse("2") => {num,2}
+      
+               parse("2 + (3 * 4)") => {num, 2}--> 
+            what we do in this. We keep hold the remaining part of the string which is
+            still to be processed.ie;
+               -spec parse(string()) -> {expr(), string()}. 
+            It returns the expression find in the beginning of the string and the second part is the remaining of the string.
+               
+            Now going to the parse function. Here pattern match the argument with an opening paranthesis("("), then rest is
+            parse recursevely. If we spot an expression, whatever remains after that, check if it starts with an operator.We
+            pass again,
+            if the remaining spot an expression, we pattern match for the closing paranthesis. We also do the case switch to
+            do the operations.
+            In this section he also provide some ideas about the functional programming, function inside another function,
+            passea as an argument. To get the longest initial segment of a list with a given property.ie;
+                  -spec get_while(fun((T) -> boolean()),[T]) -> {[T], [T]}.
+               The boolean function represent the properties, what we do here is finding the longest initial segment with the
+               property.
+         
+            You get the tutorials here: https://www.youtube.com/watch?v=gKRyAb7d8lo.(in this link, First tutorial link, find
+            the other sections using this this).
+         
+###     6. Simplification - Simon Thompson
+            In this section he simplifying the code by adding more simple functions. He uses the idea of functional
+            programming,tail recursion etc.And is better class to understand these basic erlang concepts in a simple
+            and more easiest way.
+            You can get the video using the above link.
+         
+  These are the first part of Erlang master class, and I advice everyone to go through these videos. Its really helpful for 
+  a fresher(like me), to understand basic concepts of erlang. I don't have the remaining video section myself. I will update
+  the remaining part when i get it.
+  
+  Thank you..
+  
