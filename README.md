@@ -239,3 +239,48 @@ These are the main topics he discussed here.
   
   Thank you..
   
+  
+##  4. Thinking Like An Erlanger --Torben Hoffmann
+            It is a small section from lambda days 2015 by Torben Hoffmann. Here he discussed some ideas about how you can 
+            approach to Erlang program, and some other topics. For the kinds, who said langauge like Erlang is hard to
+            learn. And he says, it is because the langauge is different and special itself. The syntax of the langauge is
+            somewhat irrelevant, simply it's not about the syntax, but thinking is everything.The Erlang is a domain
+            specific langauge and starts with the telecome.
+            
+            The GOLDEN TRINITY of Erlang
+            --------------------------------
+               1. share nothing
+               2. fail fast  -- let it fail
+               3. failure handling
+               
+            Erlang uses tons of process.Program java to get objets, Erlang give process instead.
+            He described how processes interacts using a simple example -- "Game Of Life". It is the evolution of a cell
+            in descrete time. the evolution of cell is depends on the neighbours. In Erlang, each cell is meant by each 
+            process, that is One process per cell. to know about the neighbours, need a little bit of protocol. After that
+            update the state to T+1 and update it's own content. Spawn a process to collect from all neighbours. We do
+            sending messages between entity, that's all we need instead of spending time by creating objects.
+            What if a process asked for older value or for future value. How we get???
+                  For older --> create a history
+                  For future --> just Queue the responds
+                  
+            Failure handling
+            --------------------
+            We need to supervise the  cells in the system if the cell dies. the supervisor then restarts it. Every time
+            it restarted, the new one that restarted with same argument and with same look, but lost all states and all
+            history.How we fix this???
+            Fix this by monitoring the cells, if a new cell come,it says please add the rest and step forwad them to the
+            current time. If a cell is down, then supervisor sends a DOWN message to monitor the cell. Then restarts it
+                     handle_info({'DOWN', Ref, process, _Pid, _Info},_) ->
+                     handle_cast({reg,XY,Pid},_)->
+                     New = erlang:monitor(process, Pid)
+            And it register with the Cell manager, it monitor and then asked the time module to what the max time for the
+            rest to reach the cell. And then returns.
+            
+            Now how about a small deadlock. A cell req to a process for its future value, but it queues the responds until
+            it get updated to the next state. Then it send back, unfortunately the cell is died or killed by something.
+            Then the cell restarted and has no previuos stateor history then comes the deadlock. He said about the quick
+            check, operation by operation etc here.
+            
+            These are basic things discussed by Torben Hoffmann.
+            You get the video: https://www.youtube.com/watch?v=_fgaPGLGZI0
+            Thank you...
