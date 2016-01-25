@@ -284,3 +284,137 @@ These are the main topics he discussed here.
             These are basic things discussed by Torben Hoffmann.
             You get the video: https://www.youtube.com/watch?v=_fgaPGLGZI0
             Thank you...
+            
+##   5. Erlang Pattern Matching - Buissness Needs  by Torben Hoffmann.(One of the best)
+            In this section, he describes hoe Erlang meets the buissness value. Let's relate the Erlang to it's bussness
+            values. Do you know what are the real buissness imperatives, it include three things 1) Faster, 2) Bigger,
+            3) Cheeper. So comes to the software needs, it demandssomething
+                     1. speed to market
+                     2. reliable
+                     3. scalable
+                     4. maintainable
+            So time to create a software that meets the needs, but the requirements are high. Then comes the Erlang matter.
+            
+            Erlang Original Requirements
+            -------------------------------
+                     1.Large scale concurrency
+                     2.Soft real time
+                     3.Distributed Systems
+                     4.hardware interactions
+                     5.Very large software systems
+                     6.Complex functionality
+                     7.Continue operation for many years
+                     8.Software maintanence
+                     9.Quality and Reliability
+                     10.Fault tolerence
+            
+            Now time to think how they relate with the buissness. For that, first grab an idea about what the market wants
+                     --> Productivity
+                     --> No down time
+                     --> Something always work
+               Compine all these together, then it simply points to a single word, "MONEY".
+               
+            Erlang goods
+            -----------------
+                     1.Low latency
+                     2.Stateful
+                     3.Concurrent
+                     4.Distributed
+                     5.Fault tolerant etc..
+            
+            =>To Share OR Not To Share
+              ------------------------
+              When two process acting on a memmory space, if one process dies,the memmory is correpted and the process is
+              shutdown.But in the case of Erlang, each process has it's own memmory spaces. So the program never correpts.
+            =>Failures
+              --------
+                  --> Programming errors
+                  --> Disk failures
+                  --> Network failures etc..
+              Erlang, the langauge is fault tolerent by design. There is failure and get managed.And also it got some 
+              buissnessbenefits too.
+              Torben described a graph, which shows how each langauge solves the customers needs. He said that Erlang is
+              three times faster than the C++ (customer needs -- C++ => 20%, Erlang => 60%).
+              
+            =>The Supervisor Pattern
+              ----------------------
+               The supervisor is not that much simple as we think, for a fresher like me,or others, its little bit a
+               complicated one.
+               It start with the start_link(Discussed supervisors in above sections), to some internal functionality, some
+               kind of start mechanism.Then it looks to the restart stratergy,child specification, number of children in
+               the process comes with the spawn link and update the restart hystory. If the child fails, then it goes to 
+               some supervising functionality,and looks the restart stratergy. The take decission's  like "should it goes
+               to restart or terminating".
+            
+            =>Buissness Benefits of Supervisor
+              -------------------------------
+              One process dies, won't matter the system continues the service.
+              Everything is logged --- You know what is wrong and you can fix it really really fast.
+              Here, the product owner is the incharge, not the softwre. Thats really anice think
+            
+            These are the basic factors or ideas discussed in this small section.
+            Thank you
+         
+##    6. Learning Erlang -- Advantage of keeping things simple  by Torben Hoffmann
+            Here he discussed the basics of Erlang and the idea of OTP. We discussed the basics already, now time learn
+            basics of OTP.
+            OTP -- Open Telecom Platform
+            -------------------------------
+            Here is a question, and hope you will get the answer at the end.
+                  "Why do most production system use OTP????".
+            Building a system
+            ------------------
+               When you build a system, you need the following
+                  -- libraries
+                  -- Design principle pattern
+                  -- Methodology
+                  -- Tools
+            Now the answer is, OTP is designed to tackle all the above things in a way that make good use of Erlangs
+            features.
+            Erlang is based on a set of principles.
+                  -- Releases
+                  -- Application
+                  -- Behaviour
+            
+            Release
+            ----------
+            It is the complete Erlang system, contains
+                  -- Erlang run time --ie; actual VM of the system.
+                  -- Large number of OTP applications
+                  -- Rules for starting/stoping , manging the system while it is running.
+                  
+            Application
+            -------------
+            It is a logical unit, it contains
+                  -- The modules that building the Erlang part of the system(Erlang code).
+                  -- Static data -- the application means to run
+                  -- Code in other langauge etc
+                  
+            Behaviour
+            -----------
+            It is the formalisation of the design pattern. You have a design pattern, the behaviour in the code on OTP
+            implements the design pattern.
+            The basic principle is---
+                  Split the code into two parts
+                     1. generic behaviour:- probided by the OTP library
+                     2. callback module:- implementedby the programmer.
+            There are five behaviour type
+                  1. gen_server -- client/server pattern
+                  2. gen_fsm -- finite stete machine pattern
+                  3. gen_event -- event manager
+                  4. supervisor -- supervision tree manager
+                  5. application -- encapsulate the application pattern
+                  
+            Supervisor
+            ------------
+            Why need a supervisor??? If you want your system long exist, there is number of services that always must
+            exists. The supervisor tree contain number of child process(supervisor, worker).Each supervisor monitor the
+            worker, if it dies, then restart it. Supervisor is discussed correctly in the above section.
+            
+            The system is open ended means that, it is perfectly possible to define new behaviours. Some of the reason 
+            that most of the production system uses the OTP is, it allows lot of extra functions, lot of reliability,
+            highly concurrent,  allow ypu to add things to OTP etc..
+            
+            These are the main topics discussed by Torben Hoffmann and Robert Virding.
+            
+            
