@@ -3,6 +3,7 @@ This contains small descriptions of video lectures from known Erlang devolopers(
 
 
 ## 1. Joe Amstrong's seminar at Stanford 
+         "https://www.youtube.com/watch?v=YaUPdgtUYko"
    
       In this lecture he describes the very basic ideas of the Erlang language. The six principles in Erlang
       and how to program this principles. And also provides basics of Tandem computers, descriptions about
@@ -42,7 +43,7 @@ These are the main topics he covered in this lecture. And also explained the Erl
 
 
 ## 2. The Mess We Are In -- Joe Amstrong
-
+               "https://www.youtube.com/watch?v=lKXe3HUG2l4"
    In this lecture he shows the mess we are in and the solution and ways to clean up the mess.He started with three topics,
             1.What's went wrong?
             2.What the law of physics say about computation
@@ -84,6 +85,7 @@ These are the main topics he discussed here.
 
 
 ## 3.Erlang master class(Kent University) -- Lnaguage processing in erlang
+            "https://www.youtube.com/watch?v=gKRyAb7d8lo"
 ###     1. Representing structured data -- Simon Thompson
             We can represent the expressions(2 + (3 * 4)) simply as a string. But it really a bad idea, Why????....
             When look into an expression we see a structure.ie;(2 + (3 * 4)), is a addition of 2 to the multiplication of 3
@@ -241,6 +243,7 @@ These are the main topics he discussed here.
   
   
 ##  4. Thinking Like An Erlanger --Torben Hoffmann
+                  "https://www.youtube.com/watch?v=_fgaPGLGZI0"
             It is a small section from lambda days 2015 by Torben Hoffmann. Here he discussed some ideas about how you can 
             approach to Erlang program, and some other topics. For the kinds, who said langauge like Erlang is hard to
             learn. And he says, it is because the langauge is different and special itself. The syntax of the langauge is
@@ -286,6 +289,7 @@ These are the main topics he discussed here.
             Thank you...
             
 ##   5. Erlang Pattern Matching - Buissness Needs  by Torben Hoffmann.(One of the best)
+                     "https://www.youtube.com/watch?v=LbR0LtEw_OA"
             In this section, he describes hoe Erlang meets the buissness value. Let's relate the Erlang to it's bussness
             values. Do you know what are the real buissness imperatives, it include three things 1) Faster, 2) Bigger,
             3) Cheeper. So comes to the software needs, it demandssomething
@@ -356,6 +360,7 @@ These are the main topics he discussed here.
             Thank you
          
 ##    6. Learning Erlang -- Advantage of keeping things simple  by Torben Hoffmann
+                     "https://www.youtube.com/watch?v=W3szsF6X5r8&list=TLKfjyU_WT-GY"
             Here he discussed the basics of Erlang and the idea of OTP. We discussed the basics already, now time learn
             basics of OTP.
             OTP -- Open Telecom Platform
@@ -417,4 +422,42 @@ These are the main topics he discussed here.
             
             These are the main topics discussed by Torben Hoffmann and Robert Virding.
             
+##   7. Creating A Real Time Game Engine in Erlang  -- Mark Allen
+                      " "https://www.youtube.com/watch?v=sla-t0ZNlMU""
+            Here he describes the basics of Erlang,what it offers as a development platform etc.
+            Basics of Erlang
+            ----------------------
+             --> The great things about Erlang---> concurrency model, transperancy, fault tolerance etc. All the points are
+                discussed in each of the above sections.
+                
+             --> What sucks in Erlang
+             ---------------------------
+               1. String handling is stupid
+               2. Syntax is off-putting
+               3. Library isn't that great --Erlang user community is really smaller one as compared to the other
+               functional programming langauges.
+               4. A bit of learning curve -- Sometimes the easy things become hard in Erlang. It is easy to spawn one
+               million process, but not to insert something on the middle of a list.
             
+             --> Key Erlang syntax idioms
+                ------------------------
+               1. processes -- It is the unit of computation in Erlang. Simply said it is a super super lightweight thread.
+                  No memmory sharing between the processes. They pass information through message passing.
+               2. Immutable Variables
+               3. Recurssion
+               4. Pattern Matching -- A very powerful and cool idea in Erlang
+               
+            A simple "fizzbuzz" example
+            --------------------------
+            You get the description and code from:
+                     "https://github.com/sonukrishna/The-fizzbuzz-example-in-Erlang"
+            
+            Then he explained about designing a game -- a simple one of players and ports.
+            The ports contains list traders, quantity and current price etc. And the players includes the current location,
+            current amount of cash etc. He described the ports and players as Erlang servers(gen_server). He described,
+            we have some supervisor at the top which spawns two childs, the game_player_sup and game_port_sup.So each
+            time a player or port show up, it starts the gen_server under it's supervision.
+            
+            These are the things he discussed. To watch and see the code use the link below
+                     "https://www.youtube.com/watch?v=sla-t0ZNlMU"
+         Thank you
